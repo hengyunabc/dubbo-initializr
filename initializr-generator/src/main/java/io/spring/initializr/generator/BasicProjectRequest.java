@@ -43,6 +43,13 @@ public class BasicProjectRequest {
 	private String language;
 	private String packageName;
 	private String javaVersion;
+	
+	private String dubboServiceName;
+	private String dubboServiceVersion;
+	// client or server
+	private String dubboSide;
+	private Boolean embeddedZookeeper;
+	private boolean qos;
 
 	// The base directory to create in the archive - no baseDir by default
 	private String baseDir;
@@ -171,6 +178,46 @@ public class BasicProjectRequest {
 
 	public void setBaseDir(String baseDir) {
 		this.baseDir = baseDir;
+	}
+
+	public String getDubboServiceName() {
+		return dubboServiceName;
+	}
+
+	public void setDubboServiceName(String dubboServiceName) {
+		this.dubboServiceName = dubboServiceName;
+	}
+
+	public String getDubboServiceVersion() {
+		return dubboServiceVersion;
+	}
+
+	public void setDubboServiceVersion(String dubboServiceVersion) {
+		this.dubboServiceVersion = dubboServiceVersion;
+	}
+
+	public String getDubboSide() {
+		return dubboSide;
+	}
+
+	public void setDubboSide(String dubboSide) {
+		this.dubboSide = dubboSide;
+	}
+
+	public Boolean getEmbeddedZookeeper() {
+		return embeddedZookeeper;
+	}
+
+	public void setEmbeddedZookeeper(Boolean embeddedZookeeper) {
+		this.embeddedZookeeper = embeddedZookeeper;
+	}
+
+	public boolean isQos() {
+		return qos;
+	}
+
+	public void setQos(boolean qos) {
+		this.qos = qos;
 	}
 
 }

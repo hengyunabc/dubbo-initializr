@@ -22,6 +22,8 @@ spring:
       strategy:
         content:
           enabled: true
+  mustache:
+    cache: false
 
 initializr:
   env:
@@ -158,6 +160,18 @@ initializr:
     kotlin:
       default-version: 1.2.20
   dependencies:
+    - name: Rpc
+      content:
+        - name: Dubbo
+          id: dubbo
+          groupId: com.alibaba.boot
+          artifactId: dubbo-spring-boot-starter
+          description: Dubbo Rpc Framework
+          version: 0.1.0
+          starter: false
+          links:
+            - rel: reference
+              href: https://github.com/apache/incubator-dubbo
     - name: Core
       content:
         - name: DevTools

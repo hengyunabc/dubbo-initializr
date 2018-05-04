@@ -281,4 +281,8 @@ $(function () {
             applyParams();
         }
     }
+    // select dubbo by default
+    $(document).ready(function() {
+        $("input[value='dubbo']").click()
+    });
 });

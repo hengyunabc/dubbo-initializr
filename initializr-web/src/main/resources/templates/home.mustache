@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Spring Initializr</title>
+    <title>Dubbo Spring Initializr</title>
     <link href="//fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{#linkTo}}/css/bootstrap.min.css{{/linkTo}}"/>
     <link rel="stylesheet" href="{{#linkTo}}/css/bootstrap-theme.min.css{{/linkTo}}"/>
@@ -21,7 +21,7 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     <div class="container-fluid">
         <div class="row start-header">
             <div class="container">
-                <h1>Spring Initializr <small>bootstrap your application now</small></h1>
+                <h1>Dubbo Spring Initializr <small>bootstrap your application now</small></h1>
             </div>
         </div>
         <div class="container start-main">
@@ -121,6 +121,54 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                     <div class="form-group">
                         <label for="starters" class="control-label">Selected Dependencies</label>
                         <div id="starters">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <h2>Dubbo</h2>
+
+                    <p>Dubbo Config</p>
+
+                    <div class="form-group dubboServiceName-form-group">
+                        <label for="dubboServiceName" class="control-label">DubboServiceName</label>
+                        <input tabindex="15" id="dubboServiceName" class="form-control" type="text" value="com.example.HelloService"
+                               name="dubboServiceName">
+                    </div>
+                    <div class="form-group groupid-form-group">
+                        <label for="dubboServiceVersion" class="control-label">DubboServiceVersion</label>
+                        <input tabindex="16" id="groupId" class="form-control" type="text" value="1.0.0"
+                               name="dubboServiceVersion">
+                    </div>
+                    <div class="form-group groupid-form-group">
+                        <label for="dubboSide" class="control-label">Client/Server</label>
+
+                        <div class="radio">
+                        <label for="dubboServer" >
+                        <input tabindex="17" id="dubboServer" type="radio" value="dubboServer"
+                               name="dubboSide" checked="checked">
+                        server</label>
+                        </div>
+
+                        <div class="radio">
+                        <label for="dubboClient" >
+                        <input tabindex="18" id="dubboClient" type="radio" value="dubboClient"
+                               name="dubboSide">
+                        client</label>
+                        </div>
+
+                        <div class="checkbox">
+                        <label for="embeddedZookeeper" >
+                        <input tabindex="19" id="embeddedZookeeper" type="checkbox" checked="checked"
+                               name="embeddedZookeeper">
+                        embeddedZookeeper</label>
+                        </div>
+
+                        <div class="checkbox">
+                        <label for="qos" >
+                        <input tabindex="20" id="qos" type="checkbox" 
+                               name="qos">
+                        qos</label>
                         </div>
                     </div>
                 </div>

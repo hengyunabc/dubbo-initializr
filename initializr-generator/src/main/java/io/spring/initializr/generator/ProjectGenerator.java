@@ -50,6 +50,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.util.Assert;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StreamUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * Generate a project based on the configured metadata.
@@ -215,7 +216,9 @@ public class ProjectGenerator {
 		rootDir.mkdirs();
 
 		File dir = initializerProjectDir(rootDir, request);
-
+		
+		generateDubboFiles(dir, request, model);
+		
 		if (isGradleBuild(request)) {
 			String gradle = new String(doGenerateGradleBuild(model));
 			writeText(new File(dir, "build.gradle"), gradle);
@@ -256,13 +259,80 @@ public class ProjectGenerator {
 
 		File resources = new File(dir, "src/main/resources");
 		resources.mkdirs();
-		writeText(new File(resources, "application.properties"), "");
+		write(new File(resources, "application.properties"), "application.properties", model);
 
 		if (request.hasWebFacet()) {
 			new File(dir, "src/main/resources/templates").mkdirs();
 			new File(dir, "src/main/resources/static").mkdirs();
 		}
 		return rootDir;
+	}
+
+	protected void generateDubboFiles(File dir, ProjectRequest request,
+			Map<String, Object> model) {
+		
+		String language = request.getLanguage();
+		
+		if(request.getDubboSide().equals("dubboClient")) {
+			model.put("isDubboClient", true);
+		}
+		boolean isDubboServer = false;
+		if(request.getDubboSide().equals("dubboServer")) {
+			isDubboServer = true;
+			model.put("isDubboServer", true);
+		}
+		boolean embeddedZookeeper = false;
+		if(request.getEmbeddedZookeeper() != null && request.getEmbeddedZookeeper() == true) {
+			embeddedZookeeper = true;
+			model.put("embeddedZookeeper", true);
+		}
+		
+		// 创建dubbo的 package 目录，然后设置属性到 model里，再生成一个个的文件
+		String.class.getCanonicalName();
+		String dubboServiceName = request.getDubboServiceName();
+		String dubboPackageName = packageName(dubboServiceName);
+		model.put("dubboPackageName", dubboPackageName);
+		
+		String codeLocation = language;
+		File src = new File(new File(dir, "src/main/" + codeLocation),
+				request.getPackageName().replace(".", "/"));
+		src.mkdirs();
+		
+		File dubboSrc = new File(new File(dir, "src/main/" + codeLocation),
+				dubboPackageName.replace(".", "/"));
+		dubboSrc.mkdirs();
+		
+		String extension = ("kotlin".equals(language) ? "kt" : language);
+		
+		String serviceSimpleName = simpleName(dubboServiceName);
+		model.put("serviceSimpleName", serviceSimpleName);
+		
+		this.write(new File(dubboSrc, serviceSimpleName + "." + extension), "DemoService." + extension, model);
+		
+		if(request.getDubboSide().equals("dubboServer")) {
+			String implFileName = serviceSimpleName + "Impl." + extension;
+			this.write(new File(dubboSrc, implFileName), "DemoServiceImpl." + extension, model);
+		}
+		if(embeddedZookeeper && isDubboServer) {
+			write(new File(src, "EmbeddedZooKeeper." + extension),
+					"EmbeddedZooKeeper." + extension, model);
+		}
+		
+	}
+	private String packageName(String className) {
+		int index = className.lastIndexOf('.');
+		if(index > 0) {
+			return className.substring(0, index);
+		}
+		return "";
+	}
+	
+	private static String simpleName(String className) {
+		int index = className.lastIndexOf('.');
+		if(index > 0) {
+			return className.substring(index + 1, className.length());
+		}
+		return className;
 	}
 
 	/**
