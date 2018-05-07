@@ -37,15 +37,16 @@ public class SourceCodeAssert {
 
 	public SourceCodeAssert(String name, String content) {
 		this.name = name;
-		this.content = content.replaceAll("\r\n", "\n");
+		this.content = trimSpaceAndEmptyLines(content.replaceAll("\r\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", ""));
 	}
 
 	public SourceCodeAssert equalsTo(Resource expected) {
 		try (InputStream stream = expected.getInputStream()) {
 			String expectedContent = StreamUtils.copyToString(stream,
-					Charset.forName("UTF-8"));
+					Charset.forName("UTF-8")).replaceAll("\r\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", "");
+			expectedContent = trimSpaceAndEmptyLines(expectedContent);
 			assertThat(content).describedAs("Content for %s", this.name)
-					.isEqualTo(expectedContent.replaceAll("\r\n", "\n"));
+					.isEqualTo(expectedContent);
 		}
 		catch (IOException e) {
 			throw new IllegalStateException("Cannot read file", e);
@@ -77,6 +78,21 @@ public class SourceCodeAssert {
 		assertThat(this.content).describedAs("Content for %s", this.name)
 				.doesNotContain(expressions);
 		return this;
+	}
+
+	private static String trimSpaceAndEmptyLines(String content) {
+		char[] value = content.toCharArray();
+		int len = value.length;
+		int st = 0;
+		char[] val = value; /* avoid getfield opcode */
+
+		while ((st < len) && (val[st] <= ' ' || val[st] == '\r' || val[st] == '\n')) {
+			st++;
+		}
+		while ((st < len) && (val[len - 1] == ' ' || val[len - 1] == '\r' || val[len - 1] == '\n')) {
+			len--;
+		}
+		return ((st > 0) || (len < value.length)) ? content.substring(st, len) : content;
 	}
 
 }

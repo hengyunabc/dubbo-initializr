@@ -270,7 +270,10 @@ public class ProjectGenerator {
 
 	protected void generateDubboFiles(File dir, ProjectRequest request,
 			Map<String, Object> model) {
-		
+		if (StringUtils.isEmpty(request.getDubboSide())) {
+			return;
+		}
+
 		String language = request.getLanguage();
 		
 		if(request.getDubboSide().equals("dubboClient")) {
