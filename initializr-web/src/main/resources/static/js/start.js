@@ -297,5 +297,7 @@ $(function () {
         		  }
         	  }
         });
+        // groovy do not support now
+        $("#language option[value='groovy']").remove();
     });
 });
