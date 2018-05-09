@@ -22,26 +22,38 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 
 /**
- * The base settings of a project request. Only these can be bound by user's
- * input.
+ * The base settings of a project request. Only these can be bound by user's input.
  *
  * @author Stephane Nicoll
  */
 public class BasicProjectRequest {
 
 	private List<String> style = new ArrayList<>();
+
 	private List<String> dependencies = new ArrayList<>();
+
 	private String name;
+
 	private String type;
+
 	private String description;
+
 	private String groupId;
+
 	private String artifactId;
+
 	private String version;
+
 	private String bootVersion;
+
 	private String packaging;
+
 	private String applicationName;
+
 	private String language;
+
 	private String packageName;
+
 	private String javaVersion;
 	
 	private String dubboServiceName;
@@ -55,7 +67,7 @@ public class BasicProjectRequest {
 	private String baseDir;
 
 	public List<String> getStyle() {
-		return style;
+		return this.style;
 	}
 
 	public void setStyle(List<String> style) {
@@ -63,7 +75,7 @@ public class BasicProjectRequest {
 	}
 
 	public List<String> getDependencies() {
-		return dependencies;
+		return this.dependencies;
 	}
 
 	public void setDependencies(List<String> dependencies) {
@@ -71,7 +83,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -79,7 +91,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(String type) {
@@ -87,7 +99,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
@@ -95,7 +107,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getGroupId() {
-		return groupId;
+		return this.groupId;
 	}
 
 	public void setGroupId(String groupId) {
@@ -103,7 +115,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getArtifactId() {
-		return artifactId;
+		return this.artifactId;
 	}
 
 	public void setArtifactId(String artifactId) {
@@ -111,7 +123,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getVersion() {
-		return version;
+		return this.version;
 	}
 
 	public void setVersion(String version) {
@@ -119,7 +131,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getBootVersion() {
-		return bootVersion;
+		return this.bootVersion;
 	}
 
 	public void setBootVersion(String bootVersion) {
@@ -127,7 +139,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getPackaging() {
-		return packaging;
+		return this.packaging;
 	}
 
 	public void setPackaging(String packaging) {
@@ -135,7 +147,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getApplicationName() {
-		return applicationName;
+		return this.applicationName;
 	}
 
 	public void setApplicationName(String applicationName) {
@@ -143,7 +155,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getLanguage() {
-		return language;
+		return this.language;
 	}
 
 	public void setLanguage(String language) {
@@ -151,10 +163,10 @@ public class BasicProjectRequest {
 	}
 
 	public String getPackageName() {
-		if (StringUtils.hasText(packageName)) {
-			return packageName;
+		if (StringUtils.hasText(this.packageName)) {
+			return this.packageName;
 		}
-		if (StringUtils.hasText(groupId) && StringUtils.hasText(artifactId)) {
+		if (StringUtils.hasText(this.groupId) && StringUtils.hasText(this.artifactId)) {
 			return getGroupId() + "." + getArtifactId();
 		}
 		return null;
@@ -165,7 +177,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getJavaVersion() {
-		return javaVersion;
+		return this.javaVersion;
 	}
 
 	public void setJavaVersion(String javaVersion) {
@@ -173,7 +185,7 @@ public class BasicProjectRequest {
 	}
 
 	public String getBaseDir() {
-		return baseDir;
+		return this.baseDir;
 	}
 
 	public void setBaseDir(String baseDir) {
