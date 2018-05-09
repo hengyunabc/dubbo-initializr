@@ -320,8 +320,10 @@ public class ProjectGenerator {
 			write(new File(src, "EmbeddedZooKeeper." + extension),
 					"EmbeddedZooKeeper." + extension, model);
 		}
-		
+
+		this.write(new File(dir, "README.md"), "README.md", model);
 	}
+
 	private String packageName(String className) {
 		int index = className.lastIndexOf('.');
 		if(index > 0) {
