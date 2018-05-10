@@ -79,12 +79,14 @@ class EmbeddedZooKeeper : SmartLifecycle {
      */
     private var errorHandler: ErrorHandler? = null
 
+    val daemon: Boolean
 
     /**
      * Construct an EmbeddedZooKeeper with a random port.
      */
     constructor() {
         clientPort = SocketUtils.findAvailableTcpPort()
+        daemon = true
     }
 
     /**
@@ -92,8 +94,9 @@ class EmbeddedZooKeeper : SmartLifecycle {
      *
      * @param clientPort  port for ZooKeeper server to bind to
      */
-    constructor(clientPort: Int) {
+    constructor(clientPort: Int, daemon: Boolean) {
         this.clientPort = clientPort
+        this.daemon = daemon
     }
 
     /**
@@ -145,7 +148,7 @@ class EmbeddedZooKeeper : SmartLifecycle {
     @Synchronized override fun start() {
         if (zkServerThread == null) {
             zkServerThread = Thread(ServerRunnable(), "ZooKeeper Server Starter")
-            zkServerThread!!.isDaemon = true
+            zkServerThread!!.isDaemon = daemon
             zkServerThread!!.start()
         }
     }
