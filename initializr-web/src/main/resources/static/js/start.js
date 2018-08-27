@@ -299,10 +299,15 @@ $(function () {
     }
     // select dubbo by default
     $(document).ready(function() {
-        $("input[value='dubbo']").click()
-        $("input[value='netty4']").click()
-        $("input[value='fastjson']").click()
-        $("input[value='commons-lang3']").click()
+        $("input[value='dubbo']").prop('checked', true)
+        $("input[value='netty4']").prop('checked', true)
+        $("input[value='fastjson']").prop('checked', true)
+        $("input[value='commons-langs']").prop('checked', true)
+        addTag('dubbo', 'Dubbo')
+        addTag('netty4', 'Netty4')
+        addTag('fastjson', 'FastJson')
+        addTag('commons-langs', 'commons-langs')
+
         // dubbo starter only support spring boot 1.5
         // TODO delete in the future.
         $("#bootVersion option").each(function(index, el) {
