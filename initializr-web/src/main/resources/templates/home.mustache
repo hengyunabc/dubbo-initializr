@@ -128,20 +128,18 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                 <div class="col-sm-12 col-md-6">
                     <h2>Dubbo</h2>
 
-                    <p>Dubbo Config</p>
-
                     <div class="form-group dubboServiceName-form-group">
-                        <label for="dubboServiceName" class="control-label">DubboServiceName</label>
+                        <label for="dubboServiceName" class="control-label">Service Name</label>
                         <input tabindex="15" id="dubboServiceName" class="form-control" type="text" value="com.example.HelloService"
                                name="dubboServiceName">
                     </div>
                     <div class="form-group groupid-form-group">
-                        <label for="dubboServiceVersion" class="control-label">DubboServiceVersion</label>
+                        <label for="dubboServiceVersion" class="control-label">Service Version</label>
                         <input tabindex="16" id="groupId" class="form-control" type="text" value="1.0.0"
                                name="dubboServiceVersion">
                     </div>
-                    <div class="form-group groupid-form-group">
-                        <label for="dubboSide" class="control-label">Client/Server</label>
+                    <div class="form-group">
+                        <label for="dubboSide" class="control-label">Client/Server: </label>
 
                         <div class="radio">
                         <label for="dubboServer" >
@@ -155,7 +153,9 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                                 <input tabindex="18" id="dubboClient" type="radio" value="dubboClient" name="dubboSide">
                                 Client</label>
                         </div>
+                    </div>
 
+                    <div class="form-group">
                         <div class="checkbox">
                         <label for="embeddedZookeeper" >
                         <input tabindex="19" id="embeddedZookeeper" type="checkbox" checked="checked"
