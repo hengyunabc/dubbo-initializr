@@ -55,12 +55,13 @@ public class BasicProjectRequest {
 	private String packageName;
 
 	private String javaVersion;
-	
+
 	private String dubboServiceName;
 	private String dubboServiceVersion;
 	// client or server
 	private String dubboSide;
 	private Boolean embeddedZookeeper;
+	private boolean endpoints;
 	private boolean qos;
 
 	// The base directory to create in the archive - no baseDir by default
@@ -222,6 +223,15 @@ public class BasicProjectRequest {
 
 	public void setEmbeddedZookeeper(Boolean embeddedZookeeper) {
 		this.embeddedZookeeper = embeddedZookeeper;
+	}
+
+
+	public boolean isEndpoints() {
+		return endpoints;
+	}
+
+	public void setEndpoints(boolean endpoints) {
+		this.endpoints = endpoints;
 	}
 
 	public boolean isQos() {

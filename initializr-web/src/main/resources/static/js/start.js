@@ -247,6 +247,18 @@ $(function () {
         $("#dependencies input[value='" + id + "']").prop('checked', false);
         removeTag(id);
     });
+
+    // when 'endpoints support' is checked, add web and actuator dependencies by default
+    $("#endpoints").bind("change", function () {
+        if ($(this).prop('checked')) {
+            $("#dependencies input[value=actuator]").prop('checked', true)
+            $("#dependencies input[value=web]").prop('checked', true)
+        } else {
+            $("#dependencies input[value=actuator]").prop('checked', false)
+            $("#dependencies input[value=web]").prop('checked', false)
+        }
+    });
+
     $("#dependencies input").bind("change", function () {
         var value = $(this).val()
         if ($(this).prop('checked')) {
