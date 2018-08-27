@@ -251,11 +251,15 @@ $(function () {
     // when 'endpoints support' is checked, add web and actuator dependencies by default
     $("#endpoints").bind("change", function () {
         if ($(this).prop('checked')) {
-            $("#dependencies input[value=actuator]").prop('checked', true)
-            $("#dependencies input[value=web]").prop('checked', true)
+            $("#dependencies input[value=actuator]").prop('checked', true);
+            $("#dependencies input[value=web]").prop('checked', true);
+            addTag(starters.get('actuator')[0].id, starters.get('actuator')[0].name);
+            addTag(starters.get('web')[0].id, starters.get('web')[0].name);
         } else {
-            $("#dependencies input[value=actuator]").prop('checked', false)
-            $("#dependencies input[value=web]").prop('checked', false)
+            $("#dependencies input[value=actuator]").prop('checked', false);
+            $("#dependencies input[value=web]").prop('checked', false);
+            removeTag(starters.get('actuator')[0].id);
+            removeTag(starters.get('web')[0].id);
         }
     });
 
